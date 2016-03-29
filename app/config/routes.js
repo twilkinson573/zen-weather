@@ -6,11 +6,12 @@ var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
 
 var Main = require('../components/Main');
+var LocationSearchContainer = require('../containers/LocationSearchContainer');
 
 var routes = (
   <Router history={hashHistory} >
     <Route path='/' component={Main}>
-      {/* Add routes here  */}     
+      <IndexRoute component={LocationSearchContainer} />
     </Route>
   </Router>
 );

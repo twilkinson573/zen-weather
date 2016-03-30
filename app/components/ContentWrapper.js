@@ -1,8 +1,9 @@
 var React = require('react');
+var styles = require('../styles');
 
 function ContentWrapper (props) {
-  render (
-    <div className='jumbotron col-sm-12 text-center'>
+  return (
+    <div className='jumbotron col-sm-12 text-center' style={styles.transparentBg}>
       {props.children}
     </div>
   )

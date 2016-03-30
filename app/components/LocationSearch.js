@@ -1,4 +1,5 @@
 var React = require('react');
+var PropTypes = React.PropTypes;
 
 function LocationSearch (props) {
   return (
@@ -21,5 +22,11 @@ function LocationSearch (props) {
     </form>
   )
 }
+
+LocationSearch.PropTypes = {
+  locationString: PropTypes.string.isRequired,
+  onUpdateLocation: PropTypes.func.isRequired,
+  onSubmitLocation: PropTypes.func.isRequired
+};
 
 module.exports = LocationSearch;

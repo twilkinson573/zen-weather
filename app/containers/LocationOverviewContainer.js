@@ -13,15 +13,13 @@ var LocationOverviewContainer = React.createClass({
     }
   },
   componentDidMount: function () {
-    // query weather API with location string
-    // return & process weather data
-    // pass weather data to LocationOverview as prop
     var searchString = this.props.location.query.locationString
     openWeatherMapHelpers.search(searchString).then(function(searchResults) {
       this.setState({
         isLoading: false,
         locationForecast: searchResults
       })
+    console.log(this.state.locationForecast)
     }.bind(this))
   },
   render: function () {

@@ -6,8 +6,10 @@ function puke (object) {
 };
 
 function LocationOverviewHeader (props) {
+  var city_name = props.locationResult.name
+  var country_code = props.locationResult.country
   return (
-    <h3>Congrats, you searched for {props.locationString}!</h3>
+    <h3>Displaying Weather for {city_name}, {country_code}</h3>
   )
 }
 
@@ -16,7 +18,7 @@ function LocationOverview (props) {
     props.isLoading === true
       ? <h3>Searching for {props.locationString}...</h3>
       : <div className='col-sm-12'>
-          <LocationOverviewHeader locationString={props.locationString}/>
+          <LocationOverviewHeader locationResult={props.locationForecast.city}/>
           <p>Monday is rainy</p>
           <p>Tuesday is sunny</p>
           <p>etc etc ...</p>

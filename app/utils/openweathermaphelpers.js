@@ -10,7 +10,9 @@ function getWeatherForecast (searchString) {
 
 var helpers = {
   search: function (searchString) {
-    return getWeatherForecast(searchString);
+    return getWeatherForecast(searchString).then(function (searchResults) {
+      return searchResults.data;
+    })
   }
 }
 

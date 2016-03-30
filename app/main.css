@@ -24,6 +24,10 @@ body {
   line-height: 40px;
 }
 
+.header a:hover, a:active, a:visited, a:link {
+  text-decoration: none;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
   .container {

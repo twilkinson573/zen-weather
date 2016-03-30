@@ -1,4 +1,6 @@
 var React = require('react');
+var Link = require('react-router').Link;
+var styles = require('../styles');
 
 function Header (props) {
   return (
@@ -11,7 +13,9 @@ function Header (props) {
             <button type="submit" className="btn btn-default">Submit</button>
           </form>
         </nav>
-        <h3 className="text-muted">React Weather</h3>
+        <Link to='/'>
+          <h3 className="text-muted">Zen Weather</h3>
+        </Link>
       </div>
   )
 };

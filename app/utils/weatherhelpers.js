@@ -9,6 +9,10 @@ var helpers = {
   },
   currentTemp: function (temp) {
     return(Math.round(temp - 273.15))
+  },
+  displayTime: function (datetimeString) {
+    var dateTime = new Date(datetimeString)
+    return dateTime.getHours();
   }
 }
 

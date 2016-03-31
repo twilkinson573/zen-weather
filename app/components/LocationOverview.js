@@ -21,7 +21,7 @@ function CurrentSummary (props) {
   return (
     <div className='col-sm-12'>
       <p>{props.currentForecast.weather[0].description}</p>
-      <h2>{weatherHelpers.currentTemp(props.currentForecast.main.temp)}&deg;C</h2>
+      <h2>{weatherHelpers.currentTemp(props.currentForecast.main.temp)}°</h2>
     </div>
   )
 }
@@ -41,8 +41,14 @@ function LocationOverview (props) {
         </div>
         <div className='row'>
           {
-            props.locationForecast.list.slice(0, 5).map(function(datapoint, i) {
-              return <div className='col-sm-2' key={i}>{puke(datapoint)}</div>
+            props.locationForecast.list.slice(0, 6).map(function(datapoint, i) {
+              return (
+                <div className='col-sm-2' key={i}>
+                  <h6>{datapoint.dt_txt}</h6>
+                  <p>{datapoint.weather[0].description}</p>
+                  <p>{weatherHelpers.currentTemp(datapoint.main.temp)}°</p>
+                </div>
+              )
             })
           }
         </div>

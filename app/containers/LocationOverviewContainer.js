@@ -20,11 +20,10 @@ var LocationOverviewContainer = React.createClass({
         locationForecast: searchResults
       })
       // This returns an array of 34 objects: sequential 3hr predictions for next 5 days
-      // console.log(this.state.locationForecast.list)
+      console.log(this.state.locationForecast.list)
     }.bind(this))
   },
   render: function () {
-    console.log('ONRENDER',this.state.locationForecast.list)
     return (
       <ContentWrapper>
         <LocationOverview 

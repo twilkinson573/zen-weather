@@ -57,6 +57,9 @@ function LocationOverview (props) {
               })
             }
           </div>
+          <div className='temp'>
+            {weatherHelpers.getDayForecasts(props.locationForecast.list)}
+          </div>
           <div className='row'>
             {
               props.locationForecast.list.slice(6, -1).map(function(datapoint, i) {

@@ -37,9 +37,12 @@ function calculateDayForecasts(days) {
     // TODO: Make this take most common weather rather than first
     var avg_weather = weather_readings[0];
     var date = days[day].dt_txt
-    newDaysArr.push({date: {temp: avg_temp, weather: avg_weather}})
+    var dayObject = {};
+    dayObject[days[day][0].dt_txt] = {temp: avg_temp, weather: avg_weather}
+    newDaysArr.push(dayObject)
   }
   console.log('NEWDAYSARR', newDaysArr)
+  return newDaysArr
 }
 
 var helpers = {
@@ -67,9 +70,7 @@ var helpers = {
     var today = getToday();
     delete days[today]
     console.log('DAYS', days)
-    // This should return an array 
-    calculateDayForecasts(days);
-    return days
+    return calculateDayForecasts(days);
   }
 }
 

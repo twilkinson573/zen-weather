@@ -59,18 +59,18 @@ function LocationOverview (props) {
           </div>
           <div className='temp'>
             {
-              Object.keys(weatherHelpers.getDayForecasts(props.locationForecast.list
-              .slice(6, props.locationForecast.list.length))).map(function(datapoint, i){
+              weatherHelpers.getDayForecasts(props.locationForecast.list
+              .slice(6, props.locationForecast.list.length)).map(function(datapoint, i){
                 return (
                   <div className='row' key={i}>
                     <div className='col-sm-4'>
-                      <p>{datapoint}</p>
+                      <p>{Object.keys(datapoint)}</p>
                     </div>
                     <div className='col-sm-4'>
-                      <p>Cloudy</p>
+                      <p>{datapoint[Object.keys(datapoint)[0]].weather}</p>
                     </div>
                     <div className='col-sm-3'>
-                      <p>12</p>
+                      <p>{weatherHelpers.currentTemp(datapoint[Object.keys(datapoint)[0]].temp)}</p>
                     </div>
                   </div>
                 )

@@ -71,6 +71,19 @@ var helpers = {
     delete days[today]
     console.log('DAYS', days)
     return calculateDayForecasts(days);
+  },
+  getWeekday: function (dateString) {
+    var weekday=new Array(7);
+    weekday[0]="Sunday";
+    weekday[1]="Monday";
+    weekday[2]="Tuesday";
+    weekday[3]="Wednesday";
+    weekday[4]="Thursday";
+    weekday[5]="Friday";
+    weekday[6]="Saturday";
+
+    var date = new Date(dateString)
+    return weekday[date.getDay()]
   }
 }
 

@@ -64,7 +64,7 @@ function LocationOverview (props) {
                 return (
                   <div className='row' key={i}>
                     <div className='col-sm-4'>
-                      <p>{Object.keys(datapoint)}</p>
+                      <p>{weatherHelpers.getWeekday(Object.keys(datapoint))}</p>
                     </div>
                     <div className='col-sm-4'>
                       <p>{datapoint[Object.keys(datapoint)[0]].weather}</p>

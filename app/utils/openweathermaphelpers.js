@@ -1,6 +1,6 @@
 var axios = require('axios');
 
-var openWeatherMapAppId = 'e1af8ac1fc86cb7ec10d7b562a3ab486'
+var openWeatherMapAppId = 'b5bd1771d70b07d753e1d534438d1692'
 
 function getWeatherForecast (searchString) {
   return axios.get('http://api.openweathermap.org/data/2.5/forecast?q='

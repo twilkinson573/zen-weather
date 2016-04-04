@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "production": "webpack -p",
-    "start": "webpack-dev-server"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "webpack-dev-server --inline --content-base . --history-api-fallback",
+    "start:prod": "webpack && node server.js"
   },
   "author": "Thomas Wilkinson",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.9.1",
+    "compression": "^1.6.1",
+    "express": "^4.13.4",
+    "if-env": "^1.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.1",

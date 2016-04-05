@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
-var weatherHelpers = require('../utils/weatherHelpers');
+var weatherHelpers = require('./../utils/weatherHelpers');
 
 function puke (object) {
   return <pre>{JSON.stringify(object, null, ' ')}</pre>

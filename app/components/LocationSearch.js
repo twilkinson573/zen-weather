@@ -12,7 +12,8 @@ function LocationSearch (props) {
             placeholder='eg. Leeds, UK'
             onChange={props.onUpdateLocation}
             value={props.locationString}
-            type='text'/>
+            type='text'
+            autoFocus={focus}/>
         </div>
         <div className='form-group col-sm-4 col-sm-offset-4'>
           <button 

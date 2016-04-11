@@ -33,7 +33,7 @@ var LocationSearchContainer = React.createClass({
       <ContentWrapper>
         <div className='col-sm-12'>
           <LocationSearch 
-            location={this.state.locationString}
+            locationString={this.state.locationString}
             onUpdateLocation={this.handleUpdateLocation}
             onSubmitLocation={this.handleSubmitLocation}/>
         </div>

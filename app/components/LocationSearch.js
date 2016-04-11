@@ -18,7 +18,8 @@ function LocationSearch (props) {
         <div className='form-group col-sm-4 col-sm-offset-4'>
           <button 
             className='btn btn-lg btn-success'
-            type='submit'>
+            type='submit'
+            disabled={!props.locationString}>
             Search
           </button>
         </div>

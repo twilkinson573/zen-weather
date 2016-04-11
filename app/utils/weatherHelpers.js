@@ -41,7 +41,7 @@ function calculateDayForecasts(days) {
     dayObject[days[day][0].dt_txt] = {temp: avg_temp, weather: avg_weather}
     newDaysArr.push(dayObject)
   }
-  console.log('NEWDAYSARR', newDaysArr)
+  // console.log('NEWDAYSARR', newDaysArr)
   return newDaysArr
 }
 
@@ -69,7 +69,7 @@ var helpers = {
     var days = forecastArray.reduce(getDayArrays, initialValue);
     var today = getToday();
     delete days[today]
-    console.log('DAYS', days)
+    // console.log('DAYS', days)
     return calculateDayForecasts(days);
   },
   getWeekday: function (dateString) {

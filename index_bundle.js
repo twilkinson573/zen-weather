@@ -19674,8 +19674,8 @@
 	var hashHistory = ReactRouter.hashHistory;
 
 	var Main = __webpack_require__(218);
-	var LocationSearchContainer = __webpack_require__(225);
-	var LocationOverviewContainer = __webpack_require__(228);
+	var Home = __webpack_require__(228);
+	var LocationOverviewContainer = __webpack_require__(229);
 
 	var routes = React.createElement(
 	  Router,
@@ -19683,7 +19683,7 @@
 	  React.createElement(
 	    Route,
 	    { path: '/', component: Main },
-	    React.createElement(IndexRoute, { component: LocationSearchContainer }),
+	    React.createElement(IndexRoute, { component: Home }),
 	    React.createElement(Route, { path: 'Overview', component: LocationOverviewContainer })
 	  )
 	);
@@ -25133,6 +25133,8 @@
 	var Link = __webpack_require__(161).Link;
 	var styles = __webpack_require__(224);
 
+	var LocationSearchContainer = __webpack_require__(225);
+
 	function Header(props) {
 	  return React.createElement(
 	    'div',
@@ -25140,20 +25142,7 @@
 	    React.createElement(
 	      'nav',
 	      null,
-	      React.createElement(
-	        'form',
-	        { className: 'navbar-form navbar-right', role: 'search' },
-	        React.createElement(
-	          'div',
-	          { className: 'form-group' },
-	          React.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
-	        ),
-	        React.createElement(
-	          'button',
-	          { type: 'submit', className: 'btn btn-default' },
-	          'Submit'
-	        )
-	      )
+	      React.createElement(LocationSearchContainer, { role: 'nav' })
 	    ),
 	    React.createElement(
 	      Link,
@@ -25220,21 +25209,11 @@
 	    });
 	  },
 	  render: function () {
-	    return(
-	      // Fix the form
-	      React.createElement(
-	        ContentWrapper,
-	        null,
-	        React.createElement(
-	          'div',
-	          { className: 'col-sm-12' },
-	          React.createElement(LocationSearch, {
-	            location: this.state.locationString,
-	            onUpdateLocation: this.handleUpdateLocation,
-	            onSubmitLocation: this.handleSubmitLocation })
-	        )
-	      )
-	    );
+	    return React.createElement(LocationSearch, {
+	      locationString: this.state.locationString,
+	      onUpdateLocation: this.handleUpdateLocation,
+	      onSubmitLocation: this.handleSubmitLocation,
+	      role: this.props.role });
 	  }
 	});
 
@@ -25265,46 +25244,53 @@
 	var PropTypes = React.PropTypes;
 
 	function LocationSearch(props) {
-	  return React.createElement(
-	    'div',
-	    { 'col-sm-12': true },
-	    React.createElement(
-	      'h2',
-	      null,
-	      'Enter a City & Country Code'
-	    ),
-	    React.createElement(
-	      'form',
-	      { onSubmit: props.onSubmitLocation },
+	  var submitButton;
+	  if (props.role === 'nav') {
+	    submitButton = React.createElement(
+	      'button',
+	      { type: 'submit', className: 'btn btn-default' },
+	      'Submit'
+	    );
+	  } else {
+	    submitButton = React.createElement(
+	      'div',
+	      { className: 'form-group col-sm-4 col-sm-offset-4' },
+	      ' ',
 	      React.createElement(
-	        'div',
-	        { className: 'form-group' },
-	        React.createElement('input', {
-	          className: 'form-control',
-	          placeholder: 'eg. Leeds, UK',
-	          onChange: props.onUpdateLocation,
-	          value: props.locationString,
-	          type: 'text' })
+	        'button',
+	        { className: 'btn btn-lg btn-success', type: 'submit', disabled: !props.locationString },
+	        ' Search '
 	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'form-group col-sm-4 col-sm-offset-4' },
-	        React.createElement(
-	          'button',
-	          {
-	            className: 'btn btn-lg btn-success',
-	            type: 'submit' },
-	          'Search'
-	        )
-	      )
-	    )
+	      ' '
+	    );
+	  }
+	  return React.createElement(
+	    'form',
+	    {
+	      onSubmit: props.onSubmitLocation,
+	      className: props.role === 'nav' ? 'navbar-form navbar-right' : null,
+	      role: 'search' },
+	    React.createElement(
+	      'div',
+	      { className: 'form-group' },
+	      React.createElement('input', {
+	        className: 'form-control',
+	        placeholder: props.role === 'nav' ? 'Search' : 'eg. Leeds, UK',
+	        onChange: props.onUpdateLocation,
+	        value: props.locationString,
+	        type: 'text',
+	        autoFocus: props.role === 'nav' ? false : focus
+	      })
+	    ),
+	    submitButton
 	  );
 	}
 
 	LocationSearch.PropTypes = {
 	  locationString: PropTypes.string.isRequired,
 	  onUpdateLocation: PropTypes.func.isRequired,
-	  onSubmitLocation: PropTypes.func.isRequired
+	  onSubmitLocation: PropTypes.func.isRequired,
+	  role: PropTypes.string
 	};
 
 	module.exports = LocationSearch;
@@ -25314,11 +25300,39 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(2);
+
+	var ContentWrapper = __webpack_require__(226);
+	var LocationSearchContainer = __webpack_require__(225);
+
+	function Home(props) {
+	  return React.createElement(
+	    ContentWrapper,
+	    null,
+	    React.createElement(
+	      'div',
+	      { className: 'col-sm-12' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Enter a City & Country Code'
+	      ),
+	      React.createElement(LocationSearchContainer, { role: 'main' })
+	    )
+	  );
+	}
+
+	module.exports = Home;
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(2);
 	var Link = __webpack_require__(161).Link;
 
-	var openWeatherMapHelpers = __webpack_require__(229);
+	var openWeatherMapHelpers = __webpack_require__(230);
 	var ContentWrapper = __webpack_require__(226);
-	var LocationOverview = __webpack_require__(247);
+	var LocationOverview = __webpack_require__(248);
 
 	var LocationOverviewContainer = React.createClass({
 	  displayName: 'LocationOverviewContainer',
@@ -25329,9 +25343,8 @@
 	      locationForecast: {}
 	    };
 	  },
-	  componentDidMount: function () {
-	    var searchString = this.props.location.query.locationString;
-	    openWeatherMapHelpers.search(searchString).then(function (searchResults) {
+	  makeRequest: function (location) {
+	    openWeatherMapHelpers.search(location).then(function (searchResults) {
 	      this.setState({
 	        isLoading: false,
 	        locationForecast: searchResults
@@ -25339,6 +25352,12 @@
 	      // This returns an array of 34 objects: sequential 3hr predictions for next 5 days
 	      // console.log(this.state.locationForecast.list)
 	    }.bind(this));
+	  },
+	  componentDidMount: function () {
+	    this.makeRequest(this.props.location.query.locationString);
+	  },
+	  componentWillReceiveProps: function (nextProps) {
+	    this.makeRequest(nextProps.location.query.locationString);
 	  },
 	  render: function () {
 	    return React.createElement(
@@ -25360,20 +25379,31 @@
 	module.exports = LocationOverviewContainer;
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var axios = __webpack_require__(230);
+	var axios = __webpack_require__(231);
 
 	var openWeatherMapAppId = 'b5bd1771d70b07d753e1d534438d1692';
 
-	function getWeatherForecast(searchString) {
-	  return axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + searchString + '&mode=json&appid=' + openWeatherMapAppId);
+	function formatSearchString(searchString) {
+	  if (!searchString.match(/,/)) {
+	    var sections = searchString.split(' ');
+	    sections.splice(sections.length - 1, 0, ', ');
+	    return sections.join('');
+	  } else {
+	    return searchString;
+	  }
+	}
+
+	function getWeatherForecast(formattedSearchString) {
+	  return axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + formattedSearchString + '&mode=json&appid=' + openWeatherMapAppId);
 	}
 
 	var helpers = {
 	  search: function (searchString) {
-	    return getWeatherForecast(searchString).then(function (searchResults) {
+	    var formattedSearchString = formatSearchString(searchString);
+	    return getWeatherForecast(formattedSearchString).then(function (searchResults) {
 	      return searchResults.data;
 	    });
 	  }
@@ -25382,25 +25412,25 @@
 	module.exports = helpers;
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(231);
+	module.exports = __webpack_require__(232);
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(232);
-	var utils = __webpack_require__(233);
-	var dispatchRequest = __webpack_require__(234);
-	var InterceptorManager = __webpack_require__(242);
-	var isAbsoluteURL = __webpack_require__(243);
-	var combineURLs = __webpack_require__(244);
-	var bind = __webpack_require__(245);
-	var transformData = __webpack_require__(238);
+	var defaults = __webpack_require__(233);
+	var utils = __webpack_require__(234);
+	var dispatchRequest = __webpack_require__(235);
+	var InterceptorManager = __webpack_require__(243);
+	var isAbsoluteURL = __webpack_require__(244);
+	var combineURLs = __webpack_require__(245);
+	var bind = __webpack_require__(246);
+	var transformData = __webpack_require__(239);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -25483,7 +25513,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(246);
+	axios.spread = __webpack_require__(247);
 
 	// Expose interceptors
 	axios.interceptors = defaultInstance.interceptors;
@@ -25514,12 +25544,12 @@
 
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(233);
+	var utils = __webpack_require__(234);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -25583,7 +25613,7 @@
 
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25833,7 +25863,7 @@
 
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25855,10 +25885,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(235);
+	        adapter = __webpack_require__(236);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(235);
+	        adapter = __webpack_require__(236);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -25874,17 +25904,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(233);
-	var buildURL = __webpack_require__(236);
-	var parseHeaders = __webpack_require__(237);
-	var transformData = __webpack_require__(238);
-	var isURLSameOrigin = __webpack_require__(239);
-	var btoa = window.btoa || __webpack_require__(240);
+	var utils = __webpack_require__(234);
+	var buildURL = __webpack_require__(237);
+	var parseHeaders = __webpack_require__(238);
+	var transformData = __webpack_require__(239);
+	var isURLSameOrigin = __webpack_require__(240);
+	var btoa = window.btoa || __webpack_require__(241);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -25959,7 +25989,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(241);
+	    var cookies = __webpack_require__(242);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -26010,12 +26040,12 @@
 
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(233);
+	var utils = __webpack_require__(234);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -26083,12 +26113,12 @@
 
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(233);
+	var utils = __webpack_require__(234);
 
 	/**
 	 * Parse headers into an object
@@ -26126,12 +26156,12 @@
 
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(233);
+	var utils = __webpack_require__(234);
 
 	/**
 	 * Transform the data for a request or a response
@@ -26152,12 +26182,12 @@
 
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(233);
+	var utils = __webpack_require__(234);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -26226,7 +26256,7 @@
 
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26268,12 +26298,12 @@
 
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(233);
+	var utils = __webpack_require__(234);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -26327,12 +26357,12 @@
 
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(233);
+	var utils = __webpack_require__(234);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -26385,7 +26415,7 @@
 
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26405,7 +26435,7 @@
 
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26423,7 +26453,7 @@
 
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26440,7 +26470,7 @@
 
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26473,13 +26503,13 @@
 
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(2);
 	var PropTypes = React.PropTypes;
 
-	var weatherHelpers = __webpack_require__(248);
+	var weatherHelpers = __webpack_require__(249);
 
 	function puke(object) {
 	  return React.createElement(
@@ -26546,6 +26576,7 @@
 	  );
 	}
 
+	// TODO: refactor into components
 	function LocationOverview(props) {
 	  return props.isLoading === true ? React.createElement(
 	    'h3',
@@ -26605,8 +26636,7 @@
 	          )
 	        );
 	      })
-	    ),
-	    React.createElement('div', { className: 'row' })
+	    )
 	  );
 	}
 
@@ -26618,7 +26648,7 @@
 	module.exports = LocationOverview;
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports) {
 
 	function getDayArrays(days, forecast) {
@@ -26668,7 +26698,7 @@
 	    dayObject[days[day][0].dt_txt] = { temp: avg_temp, weather: avg_weather };
 	    newDaysArr.push(dayObject);
 	  }
-	  console.log('NEWDAYSARR', newDaysArr);
+	  // console.log('NEWDAYSARR', newDaysArr)
 	  return newDaysArr;
 	}
 
@@ -26694,7 +26724,7 @@
 	    var days = forecastArray.reduce(getDayArrays, initialValue);
 	    var today = getToday();
 	    delete days[today];
-	    console.log('DAYS', days);
+	    // console.log('DAYS', days)
 	    return calculateDayForecasts(days);
 	  },
 	  getWeekday: function (dateString) {

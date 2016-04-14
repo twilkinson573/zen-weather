@@ -40,6 +40,7 @@ function ShortForecast (props) {
   )
 }
 
+// TODO: refactor into components
 function LocationOverview (props) {
   return (
     props.isLoading === true
@@ -75,13 +76,6 @@ function LocationOverview (props) {
                   </div>
                 )
               })
-            }
-          </div>
-          <div className='row'>
-            {
-              // props.locationForecast.list.map(function(datapoint, i) {
-              //   return <p key={i}>{datapoint.dt_txt}</p>
-              // })
             }
           </div>
         </div>

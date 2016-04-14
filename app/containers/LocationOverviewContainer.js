@@ -12,9 +12,8 @@ var LocationOverviewContainer = React.createClass({
       locationForecast: {}
     }
   },
-  componentDidMount: function () {
-    var searchString = this.props.location.query.locationString
-    openWeatherMapHelpers.search(searchString).then(function(searchResults) {
+  makeRequest: function (location) {
+    openWeatherMapHelpers.search(location).then(function(searchResults) {
       this.setState({
         isLoading: false,
         locationForecast: searchResults
@@ -22,6 +21,12 @@ var LocationOverviewContainer = React.createClass({
       // This returns an array of 34 objects: sequential 3hr predictions for next 5 days
       // console.log(this.state.locationForecast.list)
     }.bind(this))
+  },
+  componentDidMount: function () {
+    this.makeRequest(this.props.location.query.locationString)
+  },
+  componentWillReceiveProps: function (nextProps) {
+    this.makeRequest(nextProps.location.query.locationString)
   },
   render: function () {
     return (

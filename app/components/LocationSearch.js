@@ -3,28 +3,25 @@ var PropTypes = React.PropTypes;
 
 function LocationSearch (props) {
   return (
-    <div col-sm-12>
-      <h2>Enter a City & Country Code</h2>
-      <form onSubmit={props.onSubmitLocation}>
-        <div className='form-group'>
-          <input
-            className='form-control'
-            placeholder='eg. Leeds, UK'
-            onChange={props.onUpdateLocation}
-            value={props.locationString}
-            type='text'
-            autoFocus={focus}/>
-        </div>
-        <div className='form-group col-sm-4 col-sm-offset-4'>
-          <button 
-            className='btn btn-lg btn-success'
-            type='submit'
-            disabled={!props.locationString}>
-            Search
-          </button>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={props.onSubmitLocation}>
+      <div className='form-group'>
+        <input
+          className='form-control'
+          placeholder='eg. Leeds, UK'
+          onChange={props.onUpdateLocation}
+          value={props.locationString}
+          type='text'
+          autoFocus={focus}/>
+      </div>
+      <div className='form-group col-sm-4 col-sm-offset-4'>
+        <button 
+          className='btn btn-lg btn-success'
+          type='submit'
+          disabled={!props.locationString}>
+          Search
+        </button>
+      </div>
+    </form>
   )
 }
 

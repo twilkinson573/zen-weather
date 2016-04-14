@@ -32,6 +32,7 @@ var LocationSearchContainer = React.createClass({
       // Fix the form
       <ContentWrapper>
         <div className='col-sm-12'>
+          <h2>Enter a City & Country Code</h2>
           <LocationSearch 
             locationString={this.state.locationString}
             onUpdateLocation={this.handleUpdateLocation}

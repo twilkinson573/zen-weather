@@ -7,10 +7,12 @@ function Header (props) {
       <div className="header clearfix">
         <nav>
           <form className="navbar-form navbar-right" role="search">
-            <div className="form-group">
+            <div className="input-group">
               <input type="text" className="form-control" placeholder="Search" />
+              <span className='input-group-btn'>
+                <button type="submit" className="btn btn-default">Submit</button>
+              </span>
             </div>
-            <button type="submit" className="btn btn-default">Submit</button>
           </form>
         </nav>
         <Link to='/'>

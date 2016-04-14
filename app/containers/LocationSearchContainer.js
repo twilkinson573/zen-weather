@@ -32,7 +32,8 @@ var LocationSearchContainer = React.createClass({
       <LocationSearch 
         locationString={this.state.locationString}
         onUpdateLocation={this.handleUpdateLocation}
-        onSubmitLocation={this.handleSubmitLocation}/>
+        onSubmitLocation={this.handleSubmitLocation}
+        role={this.props.role} />
     )
   }
 });

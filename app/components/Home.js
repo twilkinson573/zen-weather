@@ -8,7 +8,7 @@ function Home (props) {
     <ContentWrapper>
       <div className='col-sm-12'>
         <h2>Enter a City & Country Code</h2>
-        <LocationSearchContainer />
+        <LocationSearchContainer role='main' />
       </div>
     </ContentWrapper>
   )
